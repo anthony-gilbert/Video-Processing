@@ -12,5 +12,6 @@ crash.log
 terraform-provider-*
 terraform-provider-aws_*
 *.tfstate.*
-
+.crush
+CRUSH.md
 .terraform/
