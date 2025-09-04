@@ -4,3 +4,9 @@ terraform-provider-aws_*
 /terraform/module/vpc/.terraform/terraform-terraform-provider-aws_v6.11.0_x5
 terraform/modules/vpc/.terraform/providers/registry.terraform.io/hashicorp/aws/6.11.0/linux_amd64/terraform-provider-aws_v6.11.0_x5
 terraform/modules/vpc/.terraform/providers/*
+.terraform/
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.backup
+crash.log
+terraform-provider-*
