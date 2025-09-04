@@ -1,0 +1,9 @@
+// // // TODO: replace with outputs from Terraform
+// // export const API_BASE = import.meta.env.VITE_API_BASE || http://localhost:8081
+
+
+// export async function createUploadUrl(filename, contentType) {
+// const res = await fetch(`${API_BASE}/presign?filename=${encodeURIComponent(filename)}&contentType=${encodeURIComponent(contentType)}`)
+// if (!res.ok) throw new Error(Failed to get presigned URL)
+// return res.json() // { url, fields } (if POST) or { url } (if PUT)
+// }
