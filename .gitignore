@@ -11,3 +11,5 @@ terraform/modules/vpc/.terraform/providers/*
 crash.log
 terraform-provider-*
 terraform-provider-aws_*
+*.tfstate.*
+
