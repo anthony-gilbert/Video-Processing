@@ -10,3 +10,4 @@ terraform/modules/vpc/.terraform/providers/*
 *.tfstate.backup
 crash.log
 terraform-provider-*
+terraform-provider-aws_*
