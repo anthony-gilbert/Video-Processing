@@ -42,14 +42,11 @@
     };
   }
     
-    
     const file = ref(null)
     const msg = ref('')
     const uploading = ref(false)
     
-    
     function onFile(e){ file.value = e.target.files?.[0] || null }
-    
     
     async function upload(){
     if(!file.value) return

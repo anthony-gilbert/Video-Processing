@@ -1,8 +1,6 @@
 
 <script setup lang="ts">
   import { RouterLink, RouterView } from 'vue-router'
-  import UploadForm from './components/UploadForm.vue'
-  import Feed from './components/Feed.vue'
 </script>
 
 <template>
@@ -14,16 +12,12 @@
         <RouterLink to="/">Feed</RouterLink>
         <RouterLink to="/upload">Upload</RouterLink>
       </nav>
-      
       <div class="wrapper">
-        <h1>Video Platform</h1>
-        
-        
+        <h1>Video Processing Platform</h1>
       </div>
     </header>
     
     <RouterView />
-    <Feed />
   </div>
 </template>
 
