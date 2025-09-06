@@ -1,28 +1,30 @@
 
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-import UploadForm from './components/UploadForm.vue'
-import Feed from './components/Feed.vue'
+  import { RouterLink, RouterView } from 'vue-router'
+  import UploadForm from './components/UploadForm.vue'
+  import Feed from './components/Feed.vue'
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+  <div>
     
-    <div class="wrapper">
-      <h1>Video Platform</h1>
-      <UploadForm />
-      <Feed />
-
+    <header>
+      <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/">Feed</RouterLink>
+        <RouterLink to="/upload">Upload</RouterLink>
       </nav>
-    </div>
-  </header>
-
-  <RouterView />
+      
+      <div class="wrapper">
+        <h1>Video Platform</h1>
+        
+        
+      </div>
+    </header>
+    
+    <RouterView />
+    <Feed />
+  </div>
 </template>
 
 <style scoped>
