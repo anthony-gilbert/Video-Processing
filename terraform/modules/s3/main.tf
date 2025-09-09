@@ -5,7 +5,7 @@ resource "aws_s3_bucket" "vide-processing-website" {
   tags = {
     Name        = "my-app-bucket"
     Environment = "dev"
-    Project     = "migration-factory"
+    Project     = "video-processing-project"
   }
 }
 
