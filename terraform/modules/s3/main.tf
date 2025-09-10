@@ -63,3 +63,68 @@ resource "aws_s3_bucket_policy" "vide-processing-website_policy" {
     ]
   })
 }
+
+# S3 bucket for state
+resource "aws_s3_bucket" "tfstate" {
+  bucket        = "tfstate-prod-us-east-1-video-processing"
+  force_destroy = false
+  tags = { Name = "tfstate", Environment = "prod" }
+}
+
+# Versioning (critical for recovery)
+resource "aws_s3_bucket_versioning" "tfstate" {
+  bucket = aws_s3_bucket.tfstate.id
+  versioning_configuration { status = "Enabled" }
+}
+
+# Encryption at rest (either AES256 or KMS)
+resource "aws_s3_bucket_server_side_encryption_configuration" "tfstate" {
+  bucket = aws_s3_bucket.tfstate.id
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm = "AES256"
+      # kms_master_key_id = aws_kms_key.tfstate.arn  # if you prefer KMS
+    }
+  }
+}
+
+# Block all public access
+resource "aws_s3_bucket_public_access_block" "tfstate" {
+  bucket                  = aws_s3_bucket.tfstate.id
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
+
+# (Recommended) Deny non-HTTPS & enforce TLS
+resource "aws_s3_bucket_policy" "tfstate" {
+  bucket = aws_s3_bucket.tfstate.id
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [{
+      Sid: "DenyInsecureTransport",
+      Effect: "Deny",
+      Principal: "*",
+      Action: "s3:*",
+      Resource: [
+        aws_s3_bucket.tfstate.arn,
+        "${aws_s3_bucket.tfstate.arn}/*"
+      ],
+      Condition: { Bool: { "aws:SecureTransport": "false" } }
+    }]
+  })
+}
+
+# DynamoDB table for state locking
+resource "aws_dynamodb_table" "tf_lock" {
+  name         = "tfstate-locks"
+  billing_mode = "PAY_PER_REQUEST"
+  hash_key     = "LockID"
+
+  attribute {
+    name = "LockID"
+    type = "S" 
+  }
+  tags = { Name = "tfstate-locks", Environment = "prod" }
+}
